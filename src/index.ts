@@ -13,6 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { hello } from './example-module';
+const doPost = (e: GoogleAppsScript.Events.DoPost) => {
+  const params = e.parameters;
+  const param = e.parameter;
 
-console.log(hello());
+  // SlackのEvent SubscriptionsでURL確認のためのリクエスト用
+  if('challenge' in params){
+    return ContentService.createTextOutput(param.challenge);
+  }
+};
