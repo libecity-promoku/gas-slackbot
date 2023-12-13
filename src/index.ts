@@ -1,5 +1,5 @@
-import { sendTextMessage } from "./sendTextMessage";
-import { createWebhookUrlList } from "./createWebhookUrlList";
+import { sendTextMessage } from './sendTextMessage';
+import { createWebhookUrlList } from './createWebhookUrlList';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const doPost = (e: GoogleAppsScript.Events.DoPost) => {
@@ -15,18 +15,18 @@ const doPost = (e: GoogleAppsScript.Events.DoPost) => {
 
   // botの投稿に反応しないように
   if ('subtype' in params.event) return;
-  
+
   const webhook_list = createWebhookUrlList();
   if (webhook_list === null) return; // webhook_listに記載がない場合は以下を処理しない。
 
   // **********
   // 以下、bot関係スクリプト
   // **********
-  if('text' in params.event) {
+  if ('text' in params.event) {
     let contents = '';
 
-    if(/^オウム返し/i.test(params.event.text)){
-      contents = `<@${postedUserName}> You said \"${params.event.text}\"`;
+    if (/^オウム返し/i.test(params.event.text)) {
+      contents = `<@${postedUserName}> You said "${params.event.text}"`;
     }
 
     sendTextMessage(webhook_list[params.event.channel], contents);
