@@ -11,7 +11,8 @@
     "build",
     "dist",
     "src",
-    "README.md"
+    "README.md",
+    ".clasp-*.json.example"
   ],
   "license": "license-header.txt",
   "licenseFormats": {
