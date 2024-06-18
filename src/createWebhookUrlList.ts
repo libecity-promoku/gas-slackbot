@@ -1,10 +1,17 @@
 /**
  * Webhook URLのリストを作成
  */
-export const createWebhookUrlList = () => {
-  const sheet =
-    SpreadsheetApp.getActiveSpreadsheet().getSheetByName('webhook_url_list');
+export const createWebhookUrlList = (): { [key: string]: string } | null => {
+  // スクリプトプロパティからスプレッドシートIDを取得
+  const spreadSheetId =
+    PropertiesService.getScriptProperties().getProperty('spreadsheet_id');
+  // スプレッドシートIDからシートを取得
+  const sheet = SpreadsheetApp.openById(spreadSheetId!).getSheetByName(
+    'webhook_url_list'
+  );
+  // シートが存在しない場合はnullを返す
   if (null === sheet) return null;
+
   const dataRange = sheet.getDataRange();
   const values = dataRange.getValues();
 
