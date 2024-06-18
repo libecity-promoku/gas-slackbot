@@ -4,7 +4,7 @@
 export const createWebhookUrlList = (): { [key: string]: string } | null => {
   // スクリプトプロパティからスプレッドシートIDを取得
   const spreadSheetId =
-    PropertiesService.getScriptProperties().getProperty('spreadsheet_id');
+    PropertiesService.getScriptProperties().getProperty('SPREADSHEET_ID');
   // スプレッドシートIDからシートを取得
   const sheet = SpreadsheetApp.openById(spreadSheetId!).getSheetByName(
     'webhook_url_list'
