@@ -1,7 +1,9 @@
 /**
- * Webhook URLのリストを作成
+ *
+ * @param channelId スプレッドシートからwebhookUrlを取得するためのchannelId
+ * @returns channelIdに該当するwebhookUrl。存在しない場合はnull
  */
-export const createWebhookUrlList = (): { [key: string]: string } | null => {
+export const pickupWebhookUrl = (channelId: string): string | null => {
   // スクリプトプロパティからスプレッドシートIDを取得
   const spreadSheetId =
     PropertiesService.getScriptProperties().getProperty('SPREADSHEET_ID');
@@ -20,16 +22,13 @@ export const createWebhookUrlList = (): { [key: string]: string } | null => {
   const channelIndex = headers.indexOf('channel_id');
   const webhookIndex = headers.indexOf('webhook_url');
 
-  const webhookList: { [key: string]: string } = {};
-
-  // 2行目から最終行までループ
+  // channelIdに該当するwebhookUrlを検索
   for (let i = 1; i < values.length; i++) {
     const row = values[i];
-    const channelId = row[channelIndex];
-    const webhookUrl = row[webhookIndex];
-
-    webhookList[channelId] = webhookUrl;
+    if (row[channelIndex] === channelId) {
+      return row[webhookIndex];
+    }
   }
 
-  return webhookList;
+  return null;
 };
