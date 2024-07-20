@@ -1,5 +1,6 @@
 import { sendTextMessage } from './sendTextMessage';
 import { createWebhookUrlList } from './createWebhookUrlList';
+import { pickupWebhookUrl } from './pickupWebhookUrl';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const doPost = (e: GoogleAppsScript.Events.DoPost) => {
@@ -16,11 +17,10 @@ const doPost = (e: GoogleAppsScript.Events.DoPost) => {
     const contents = `<@${params.event.channel.creator}> makes channel "#${params.event.channel.name}"`;
 
     // 投稿先 general固定
-    // 'C04BBQE7RTJ': 'https://hooks.slack.com/services/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'
-    sendTextMessage(
-      'https://hooks.slack.com/services/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',
-      contents
-    );
+    const general_channel_id = pickupWebhookUrl('C04AKC5FF2B');
+    if (general_channel_id === null) return;
+
+    sendTextMessage(general_channel_id, contents);
     return;
   }
 
