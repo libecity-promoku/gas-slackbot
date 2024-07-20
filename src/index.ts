@@ -17,7 +17,7 @@ const doPost = (e: GoogleAppsScript.Events.DoPost) => {
     const contents = `<@${params.event.channel.creator}> makes channel "#${params.event.channel.name}"`;
 
     // 投稿先 general固定
-    const general_channel_id = pickupWebhookUrl('C04AKC5FF2B');
+    const general_channel_id = pickupWebhookUrl('C04BBQE7RTJ');
     if (general_channel_id === null) return;
 
     sendTextMessage(general_channel_id, contents);
